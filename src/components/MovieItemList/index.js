@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import apiImages from '../../services/apiImages';
 import { TextDefault, Title, BoxMovie, Row, Col1, Col2, Image, BoxNoImage } from './styles';
 
@@ -22,6 +22,14 @@ const MovieItemList = (props) => {
         })
     };
 
+    const alertMsg = (title, message) => {
+        Alert.alert(
+            title,
+            message,
+            [{ text: 'Ok' }]
+        )
+    }
+
     function MovieImage(){
         if(movieImg){
             return <Image
@@ -37,13 +45,10 @@ const MovieItemList = (props) => {
     }
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
-        //getImage();
+        getImage();
     },[]);
 
-    return <BoxMovie>
+    return <BoxMovie onPress={() => alertMsg('Aviso', 'Esse App faz apenas listagem dos filmes ;)')}>
 
         <Row>
             <Col1>
